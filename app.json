@@ -9,14 +9,18 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.webEngage.prodSwift",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "googleServicesFile": "./google-services.json",
+      "edgeToEdgeEnabled": true,
+      "package": "com.webengage.reactSample"
     },
     "web": {
       "bundler": "metro",
@@ -32,6 +36,33 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "./node_modules/webengage-expo/src/withWebEngage.js",
+        {
+          "push": {
+            "mode": "development"
+          },
+          "ios": {
+            "WEGLicenseCode": "~1341056cd",
+            "WEGLogLevel": "VERBOSE",
+            "WEGEnvironment": "DEFAULT",
+            "WEGAutoRegister": true
+          },
+          "android": {
+            "manifest": {
+              "com.webengage.sdk.android.environment": "us",
+              "com.webengage.sdk.android.key": "~1341056cd",
+              "com.webengage.sdk.android.debug": true
+            }
+          }
+        }
+      ],
+      [
+        "webengage-expo-push",
+        {
+          "mode": "development"
         }
       ]
     ],

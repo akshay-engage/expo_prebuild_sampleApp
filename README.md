@@ -1,50 +1,83 @@
-# Welcome to your Expo app 👋
+# 📱 Expo React Native Sample App – WebEngage Integration
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This repository contains a sample **Expo React Native** app showcasing how to integrate [WebEngage](https://docs.webengage.com) with native support via Expo prebuild.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Features
 
-   ```bash
-   npm install
-   ```
+- Integrates WebEngage SDK with a React Native (Expo) app
+- Supports Firebase Cloud Messaging (FCM) push notifications
+- Uses `expo prebuild` to generate native iOS/Android folders
+- Easy configuration using `app.json`
+- Example setup for Android push via `google-services.json`
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 📦 Requirements
 
-In the output, you'll find options to open the app in a
+- Node.js ≥ 14
+- npm or yarn
+- Expo CLI (`npm install -g expo-cli`)
+- WebEngage license key
+- Firebase project with `google-services.json`
+- macOS with Xcode (for iOS testing)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🔧 Setup Instructions
 
-## Get a fresh project
+### ✅ Follow these 6 steps to get started:
 
-When you're ready, run:
+1. **Run `expo prebuild`** to generate the native `android/` and `ios/` folders.
+2. **Replace the `google-services.json` file** in `android/app/` with your actual Firebase config file.
+3. **Update the package name** in `app.json` under `expo.android.package` to match the one in your `google-services.json`.
+4. **Update `app.json`** with your WebEngage `licenseCode` and `environment` (`DEV` or `PROD`).
+5. **Run the app** using the following commands:
+   - `npm run android` – to run the app on Android.
+   - `npm run ios` – to run the app on iOS (macOS only).
+6. **The `android/` and `ios/` folders** will include all necessary native code, and `google-services.json` will be placed in the right directory automatically.
 
-```bash
-npm run reset-project
-```
+---
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 📄 Example `app.json` Configuration
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```json
+{
+  "expo": {
+    "name": "expoTest",
+    "slug": "expoTest",
+    "android": {
+      "package": "com.yourcompany.app"
+    },
+    "plugins": [
+    [
+        "./node_modules/webengage-expo/src/withWebEngage.js",
+        {
+          "push": {
+            "mode": "development"
+          },
+          "ios": {
+            "WEGLicenseCode": "~1341056cd",
+            "WEGLogLevel": "VERBOSE",
+            "WEGEnvironment": "DEFAULT",
+            "WEGAutoRegister": true
+          },
+          "android": {
+            "manifest": {
+              "com.webengage.sdk.android.environment": "us",
+              "com.webengage.sdk.android.key": "~1341056cd",
+              "com.webengage.sdk.android.debug": true
+            }
+          }
+        }
+      ],
+      [
+        "webengage-expo-push",
+        {
+          "mode": "development"
+        }
+      ]
+    ]
+  }
+}
